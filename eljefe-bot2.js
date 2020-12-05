@@ -1,10 +1,10 @@
 	/*jshint esversion: 6 */
 
-	const { prefix,	version, token } = require('./config.json');
+	//const { prefix,	version, token } = require('./config.json');
 	//console.log('Prefix: '+prefix);
 	//console.log('Version: '+version);
 	//console.log('Token: '+token);
-
+	var prefix = process.env.prefix;
 	const {
 		Client,
 		Attachment
@@ -113,4 +113,4 @@
 		}
 	});
 
-	bot.login(token);
+	bot.login(process.env.DISCORD_TOKEN);
