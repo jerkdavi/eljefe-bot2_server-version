@@ -1,0 +1,1 @@
+worker: node eljefe-bot2.js
