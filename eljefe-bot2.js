@@ -36,7 +36,7 @@
 			}
 			
 			//if(input === prefix + 'HELP' || input === prefix + 'COMMANDS'){
-			if(args[1].startsWith('https://www.youtube.com/watch?v'){
+			if(args[1].startsWith('https://www.youtube.com/watch?v')){
 
 				if(!servers[message.guild.id]){
 					servers[message.guild.id] = {
