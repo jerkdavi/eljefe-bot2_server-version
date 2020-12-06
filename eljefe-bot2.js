@@ -37,7 +37,7 @@
 
 			if(!servers[message.guild.id]){
 				servers[message.guild.id] = {
-					ueue: []
+					queue: []
 					};
 				console.log('Queue created!');
 			}
