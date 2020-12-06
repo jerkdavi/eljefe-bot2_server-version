@@ -19,11 +19,11 @@
 	});
 
 	bot.on('message', function(message){
-		var input = message.content.toUpperCase();
 		var sender = message.author;
-		
-		if(input.startsWith(prefix + 'PLAY')){
-			var args = input.toString().split(' ');
+		var args = message.content.toString().split(' ');
+		var input = args[0].toUpperCase();
+		if(input === prefix + 'PLAY'){
+			
 			console.log('args[0]: '+args[0]);
 			console.log('args[1]: '+args[1]);
 			if(!args[1]){
