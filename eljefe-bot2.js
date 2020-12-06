@@ -34,34 +34,43 @@
 				message.channel.send('You must be in a voice channel to play the music!');
 				return;
 			}
+			
+			//if(input === prefix + 'HELP' || input === prefix + 'COMMANDS'){
+			if(args[1].startsWith('https://www.youtube.com/watch?v'){
 
-			if(!servers[message.guild.id]){
-				servers[message.guild.id] = {
-					queue: []
-					};
-				console.log('Queue created!');
-			}
-			server = servers[message.guild.id];
-			server.queue.push(args[1]);
-			console.log('Queue push passed!');
-
-			function play(connection, message){
+				if(!servers[message.guild.id]){
+					servers[message.guild.id] = {
+						queue: []
+						};
+					console.log('Queue created!');
+				}
 				server = servers[message.guild.id];
-				server.dispatcher = connection.play(ytdl(server.queue[0], {filter: 'audioonly'}));
-				server.queue.shift();
-				console.log('Queue shift passed!');
+				server.queue.push(args[1]);
+				console.log('Queue push passed!');
 
-				server.dispatcher.on('finish', () => {
-					if(server.queue[0]){
-						play(connection, message);
-						console.log('If passed!');
-					} else {
-						connection.disconnect();
-						console.log('Else passed!');
-						joinstatus='waiting';
-						servers[message.guild.id] = '';
-					}
-				});
+				function play(connection, message){
+					server = servers[message.guild.id];
+					server.dispatcher = connection.play(ytdl(server.queue[0], {filter: 'audioonly'}));
+					server.queue.shift();
+					console.log('Queue shift passed!');
+
+					server.dispatcher.on('finish', () => {
+						if(server.queue[0]){
+							play(connection, message);
+							console.log('If passed!');
+						} else {
+							connection.disconnect();
+							console.log('Else passed!');
+							joinstatus='waiting';
+							servers[message.guild.id] = '';
+						}
+					});
+				}
+			}
+			else{
+				message.channel.send('You didn\'t provide a valid youtube link!');
+				console.log('Invalid youtube link!');
+				return;
 			}
 
 			if(joinstatus==='joined'){
