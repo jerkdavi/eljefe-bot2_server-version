@@ -24,6 +24,8 @@
 		
 		if(input.startsWith(prefix + 'PLAY')){
 			var args = input.toString().split(' ');
+			console.log('args[0]: '+args[0]);
+			console.log('args[1]: '+args[1]);
 			if(!args[1]){
 				message.channel.send('You need to provide a link!');
 				return;
