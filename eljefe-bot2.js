@@ -1,8 +1,10 @@
 	/*jshint esversion: 6 */
 
 	var Discord = require('discord.js');
-	var ytdl = require('ytdl-core');
 	var bot = new Discord.Client();
+	var ytdl = require('ytdl-core');
+
+	var commandsList = fs.readFileSync('Storage/commands.txt', 'utf8');
 
 	var prefix = process.env.prefix;
 	var owner = process.env.ownerID;
@@ -11,15 +13,24 @@
 	var server;
 	var joinstatus='waiting';
 
-	bot.on('ready', function(ready){
-		console.log(`Logged in as ${bot.user.tag}!`);
-		bot.user.setStatus('Online');
-	});
-
 	bot.on('message', function(message){
 		var sender = message.author;
 		var args = message.content.toString().split(' ');
 		var input = args[0].toUpperCase();
+
+		if((sender.id === '781250071215472640') || (sender.id === '781277535232458763')){
+			console.log('Sender is a bot!');
+			return;
+		}
+
+		if(input === prefix + 'HELP' || input === prefix + 'COMMANDS'){
+			message.channel.send(commandsList);
+		}
+
+		if(input === prefix + 'PING'){
+			message.channel.send('Ping successful! The bot is online!');
+		}
+
 		if(input === prefix + 'PLAY'){
 			
 			console.log('args[0]: '+args[0]);
@@ -110,6 +121,12 @@
 				return;
 			}
 		}
+	});
+	
+	bot.on('ready', function(ready){
+
+		console.log(`Logged in as ${bot.user.tag}!`);
+		bot.user.setStatus('Online');
 	});
 
 	bot.login(process.env.DISCORD_TOKEN);
