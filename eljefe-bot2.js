@@ -2,6 +2,7 @@
 
 	var Discord = require('discord.js');
 	var bot = new Discord.Client();
+	var fs = require('fs');
 	var ytdl = require('ytdl-core');
 
 	var commandsList = fs.readFileSync('Storage/commands.txt', 'utf8');
