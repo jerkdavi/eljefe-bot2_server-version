@@ -1,7 +1,7 @@
 {
 	"name": "eljefe-bot2",
 	"version": "1.0.0",
-	"description": "I am a funny little bot.",
+	"description": "I am a music bot.",
 	"main": "eljefe-bot2.js",
 	"scripts": {
 		"start": "node eljefe-bot2.js"
