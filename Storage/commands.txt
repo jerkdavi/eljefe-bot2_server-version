@@ -1,0 +1,10 @@
+List of Commands:
+
+>help or >commands - Returns this List of Commands
+>ping - Pings the bot
+>play [youtube link] - Plays the song by youtube link
+>play [song name] - Plays the song by song name --> Still working on this!
+>queue - Displays the song queue --> Still working on this!
+>lyrics - Displays the current song's lyrics --> Still working on this!
+>skip - Skips the current song
+>stop - Stop the playlist altogether
