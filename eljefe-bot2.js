@@ -32,7 +32,7 @@
 				message.channel.send('You must be in a voice channel to play the music!');
 				return;
 			}
-			if(ytdl.validateURL(url)){
+			if(ytdl.validateURL(args[1])){
 				if(!servers[message.guild.id]){
 					servers[message.guild.id] = {
 						queue: []
