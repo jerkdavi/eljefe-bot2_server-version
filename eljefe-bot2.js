@@ -7,8 +7,6 @@
 	var prefix = process.env.prefix;
 	var owner = process.env.ownerID;
 
-	var sender = message.author;
-	var input = message.content.toUpperCase();
 	var swearword;
 
 	var servers = {};
@@ -21,6 +19,9 @@
 	});
 
 	bot.on('message', function(message){
+		var input = message.content.toUpperCase();
+		var sender = message.author;
+		
 		if(input.startsWith(prefix + 'PLAY')){
 			var args = input.toString().split(' ');
 			if(!args[1]){
