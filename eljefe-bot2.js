@@ -7,8 +7,6 @@
 	var prefix = process.env.prefix;
 	var owner = process.env.ownerID;
 
-	var swearword;
-
 	var servers = {};
 	var server;
 	var joinstatus='waiting';
@@ -34,10 +32,7 @@
 				message.channel.send('You must be in a voice channel to play the music!');
 				return;
 			}
-			
-			//if(input === prefix + 'HELP' || input === prefix + 'COMMANDS'){
-			if(args[1].startsWith('https://www.youtube.com/watch?v')){
-
+			if(ytdl.validateURL(url)){
 				if(!servers[message.guild.id]){
 					servers[message.guild.id] = {
 						queue: []
