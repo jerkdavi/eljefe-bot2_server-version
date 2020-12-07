@@ -50,7 +50,7 @@
 				description:`Ping successful! The bot ${bot.user.tag}! is online!`,
 				color:0x2471A3
 			}})
-			console.log(`Ping successful! The bot ${bot.user.tag}! is online!`);
+			console.log('>ping');
 		}
 
 		if(input === prefix + 'PLAY'){
@@ -63,7 +63,7 @@
 					description:'You need to provide a link!',
 					color:0x2471A3
 				}})
-				console.log('You need to provide a link!');
+				console.log('>play ?');
 				return;
 			}
 			if(!(ytdl.validateURL(args[1]))){
@@ -73,7 +73,7 @@
 					description:'You didn\'t provide a valid youtube link!',
 					color:0x2471A3
 				}})
-				console.log('Invalid youtube link!');
+				console.log('>play '+args[1]);
 				return;
 			}
 			else{
@@ -158,6 +158,7 @@
 					description:'Skipping the song!',
 					color:0x2471A3
 				}})
+				console.log('>skip');
 				console.log('Skipped the song!');
 			}
 			else{
@@ -167,8 +168,9 @@
 					description:'There are no songs! What are you skipping?',
 					color:0x2471A3
 				}})
-				return;
+				console.log('>skip');
 				console.log('There are no songs! What are you skipping?');
+				return;
 			}
 		}
 
@@ -182,6 +184,7 @@
 					description:'Ending the queue. Leaving the voice channel!',
 					color:0x2471A3
 				}})
+				console.log('>stop');
 				console.log('Ending the queue. Leaving the voice channel!');
 			}
 			else{
@@ -191,6 +194,7 @@
 					description:'There are no songs! What are you stoping?',
 					color:0x2471A3
 				}})
+				console.log('>stop');
 				console.log('There are no songs! What are you stoping?');
 				return;
 			}
