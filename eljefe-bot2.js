@@ -25,6 +25,7 @@
 		}
 
 		if(input === prefix + 'HELP'){
+			message.delete();
 			message.channel.send({embed:{
 				title:'>help',
 				description:commandsList,
@@ -32,6 +33,7 @@
 			}})
 		}
 		if(input === prefix + 'COMMANDS'){
+			message.delete();
 			message.channel.send({embed:{
 				title:'>commands',
 				description:commandsList,
@@ -40,6 +42,7 @@
 		}
 
 		if(input === prefix + 'PING'){
+			message.delete();
 			message.channel.send({embed:{
 				title:'>ping',
 				description:`Ping successful! The bot ${bot.user.tag}! is online!`,
@@ -48,7 +51,7 @@
 		}
 
 		if(input === prefix + 'PLAY'){
-			
+			message.delete();
 			console.log('args[0]: '+args[0]);
 			console.log('args[1]: '+args[1]);
 			if(!args[1]){
@@ -129,6 +132,7 @@
 		}
 
 		if(input === prefix + 'SKIP'){
+			message.delete();
 			if(joinstatus==='joined'){
 				server = servers[message.guild.id];
 				if(server.dispatcher){
@@ -153,6 +157,7 @@
 		}
 
 		if(input === prefix + 'STOP'){
+			message.delete();
 			if(joinstatus==='joined'){
 				server = servers[message.guild.id];
 				server.dispatcher.end();
