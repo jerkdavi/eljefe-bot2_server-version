@@ -106,10 +106,8 @@
 		if(input === prefix + 'SKIP'){
 			if(joinstatus==='joined'){
 				server = servers[message.guild.id];
-				if(server.dispatcher){
-					//server.dispatcher.end();
-					message.channel.send('SKIP!');
-				}
+				server.dispatcher.end();
+				message.channel.send('SKIP!');
 			}
 			else{
 				return;
