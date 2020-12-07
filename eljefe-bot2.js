@@ -88,6 +88,11 @@
 				server = servers[message.guild.id];
 				server.queue.push(args[1]);
 				console.log('Queue push passed!');
+				message.channel.send({embed:{
+						title:'>play '+args[1],
+						description:'Added to the queue!',
+						color:0x2471A3
+					}})
 
 				function play(connection, message){
 					server = servers[message.guild.id];
