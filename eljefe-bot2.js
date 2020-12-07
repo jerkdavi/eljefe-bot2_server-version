@@ -60,7 +60,6 @@
 			}
 			if(!(ytdl.validateURL(args[1]))){
 				message.channel.send({embed:{
-					title:'>play '+args[1],
 					description:'You didn\'t provide a valid youtube link!',
 					color:0x2471A3
 				}})
