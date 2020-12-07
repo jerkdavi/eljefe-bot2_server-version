@@ -24,12 +24,27 @@
 			return;
 		}
 
-		if(input === prefix + 'HELP' || input === prefix + 'COMMANDS'){
-			message.channel.send(commandsList);
+		if(input === prefix + 'HELP'){
+			message.channel.send({embed:{
+				title:'>help',
+				description:commandsList,
+				color:0x2471A3
+			}})
+		}
+		if(input === prefix + 'COMMANDS'){
+			message.channel.send({embed:{
+				title:'>commands',
+				description:commandsList,
+				color:0x2471A3
+			}})
 		}
 
 		if(input === prefix + 'PING'){
-			message.channel.send('Ping successful! The bot is online!');
+			message.channel.send({embed:{
+				title:'>ping',
+				description:`Ping successful! The bot ${bot.user.tag}! is online!`,
+				color:0x2471A3
+			}})
 		}
 
 		if(input === prefix + 'PLAY'){
@@ -37,11 +52,18 @@
 			console.log('args[0]: '+args[0]);
 			console.log('args[1]: '+args[1]);
 			if(!args[1]){
-				message.channel.send('You need to provide a link!');
+				message.channel.send({embed:{
+					title:'>play ?',
+					description:'You need to provide a link!',
+					color:0x2471A3
+				}})
 				return;
 			}
 			if(!message.member.voice.channel){
-				message.channel.send('You must be in a voice channel to play the music!');
+				message.channel.send({embed:{
+					description:'You must be in a voice channel to play the music!',
+					color:0x2471A3
+				}})
 				return;
 			}
 			if(ytdl.validateURL(args[1])){
@@ -60,6 +82,11 @@
 					server.dispatcher = connection.play(ytdl(server.queue[0], {filter: 'audioonly'}));
 					server.queue.shift();
 					console.log('Queue shift passed!');
+					message.channel.send({embed:{
+						title:'>play '+args[1],
+						description:'Playing the song!',
+						color:0x2471A3
+					}})
 
 					server.dispatcher.on('finish', () => {
 						if(server.queue[0]){
@@ -75,7 +102,11 @@
 				}
 			}
 			else{
-				message.channel.send('You didn\'t provide a valid youtube link!');
+				message.channel.send({embed:{
+					title:'>play '+args[1],
+					description:'You didn\'t provide a valid youtube link!',
+					color:0x2471A3
+				}})
 				console.log('Invalid youtube link!');
 				return;
 			}
@@ -86,6 +117,10 @@
 
 			else{
 				message.member.voice.channel.join().then(function(connection){
+					message.channel.send({embed:{
+						description:'Joined the voice channel!',
+						color:0x2471A3
+					}})
 					play(connection, message);
 					console.log('Joined the voice channel!');
 					joinstatus='joined';
@@ -99,12 +134,20 @@
 				if(server.dispatcher){
 					server.dispatcher.end();
 				}
-				message.channel.send('Skipping the song!');
+				message.channel.send({embed:{
+					title:'>skip',
+					description:'Skipping the song!',
+					color:0x2471A3
+				}})
 				console.log('Skipped the queue!');
 			}
 			else{
-				message.channel.send('There are no songs! What are you skipping?');
-				console.log('There are no songs! What are you skipping?');
+				message.channel.send({embed:{
+					title:'>skip',
+					description:'There are no songs! What are you skipping?',
+					color:0x2471A3
+				}})
+				message.channel.send();
 				return;
 			}
 		}
@@ -113,11 +156,19 @@
 			if(joinstatus==='joined'){
 				server = servers[message.guild.id];
 				server.dispatcher.end();
-				message.channel.send('Ending the queue. Leaving the voice channel!');
-				console.log('Stopped the queue!');
+				message.channel.send({embed:{
+					title:'>stop',
+					description:'Ending the queue. Leaving the voice channel!',
+					color:0x2471A3
+				}})
+				message.channel.send();
 			}
 			else{
-				message.channel.send('There are no songs! What are you stoping?');
+				message.channel.send({embed:{
+					title:'>stop',
+					description:'There are no songs! What are you stoping?',
+					color:0x2471A3
+				}})
 				console.log('There are no songs! What are you stoping?');
 				return;
 			}
