@@ -83,9 +83,8 @@
 					console.log('Queue created!');
 				}
 				if(joinstatus==='joined'){
-				console.log('I\'m already in the voice channel!');
+					console.log('I\'m already in the voice channel!');
 				}
-
 				else{
 					message.member.voice.channel.join().then(function(connection){
 						message.channel.send({embed:{
@@ -97,6 +96,7 @@
 						play(connection, message);
 					});
 				}
+
 				server = servers[message.guild.id];
 				server.queue.push(args[1]);
 				console.log('Queue push passed!');
@@ -122,8 +122,13 @@
 							play(connection, message);
 							console.log('If passed!');
 						} else {
+							message.channel.send({embed:{
+								description:'Leaving the voice channel!',
+								color:0x2471A3
+							}})
 							connection.disconnect();
 							console.log('Else passed!');
+							console.log('Leaving the voice channel!');
 							joinstatus='waiting';
 							servers[message.guild.id] = '';
 						}
@@ -143,7 +148,7 @@
 					color:0x2471A3
 				}})
 				console.log('>skip');
-				console.log('Skipped the song!');
+				console.log('Skipping the song!');
 			}
 			else{
 				message.channel.send({embed:{
@@ -161,11 +166,11 @@
 				server = servers[message.guild.id];
 				server.dispatcher.end();
 				message.channel.send({embed:{
-					description:'Ending the queue. Leaving the voice channel!',
+					description:'Stoping the queue!',
 					color:0x2471A3
 				}})
 				console.log('>stop');
-				console.log('Ending the queue. Leaving the voice channel!');
+				console.log('Stopping the queue!');
 			}
 			else{
 				message.channel.send({embed:{
