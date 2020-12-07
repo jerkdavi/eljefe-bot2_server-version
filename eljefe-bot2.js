@@ -85,9 +85,9 @@
 							play(connection, message);
 							message.channel.send('IF!');
 						} else {
-							connection.disconnect();
-							joinstatus='waiting';
-							servers[message.guild.id] = '';
+							//connection.disconnect();
+							//joinstatus='waiting';
+							//servers[message.guild.id] = '';
 							message.channel.send('ELSE!');
 						}
 					});
@@ -109,6 +109,9 @@
 				if(server.dispatcher){
 					server.dispatcher.end();
 					message.channel.send('SKIP!');
+					connection.disconnect();
+					joinstatus='waiting';
+					servers[message.guild.id] = '';
 				}
 			}
 			else{
@@ -121,6 +124,9 @@
 				server = servers[message.guild.id];
 				server.dispatcher.end();
 				message.channel.send('STOP!');
+				connection.disconnect();
+				joinstatus='waiting';
+				servers[message.guild.id] = '';
 			}
 			else{
 				return;
