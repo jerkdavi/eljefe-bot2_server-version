@@ -31,6 +31,7 @@
 				description:commandsList,
 				color:0x2471A3
 			}})
+			console.log('>help');
 		}
 		if(input === prefix + 'COMMANDS'){
 			message.delete();
@@ -39,6 +40,7 @@
 				description:commandsList,
 				color:0x2471A3
 			}})
+			console.log('>commands');
 		}
 
 		if(input === prefix + 'PING'){
@@ -48,6 +50,7 @@
 				description:`Ping successful! The bot ${bot.user.tag}! is online!`,
 				color:0x2471A3
 			}})
+			console.log(`Ping successful! The bot ${bot.user.tag}! is online!`);
 		}
 
 		if(input === prefix + 'PLAY'){
@@ -60,6 +63,7 @@
 					description:'You need to provide a link!',
 					color:0x2471A3
 				}})
+				console.log('You need to provide a link!');
 				return;
 			}
 			if(!(ytdl.validateURL(args[1]))){
@@ -79,6 +83,7 @@
 						description:'You must be in a voice channel to play the music!',
 						color:0x2471A3
 					}})
+					console.log('You must be in a voice channel to play the music!');
 					return;
 				}
 				if(!servers[message.guild.id]){
@@ -92,10 +97,11 @@
 				console.log('Queue push passed!');
 				message.delete();
 				message.channel.send({embed:{
-						title:'>play '+args[1],
-						description:'Added to the queue!',
-						color:0x2471A3
-					}})
+					title:'>play '+args[1],
+					description:'Song added to the queue!',
+					color:0x2471A3
+				}})
+				console.log('Song added to the queue!');	
 
 				function play(connection, message){
 					server = servers[message.guild.id];
@@ -107,6 +113,7 @@
 						description:'Playing the song!',
 						color:0x2471A3
 					}})
+					console.log('Playing the song!');
 
 					server.dispatcher.on('finish', () => {
 						if(server.queue[0]){
@@ -132,9 +139,9 @@
 						description:'Joined the voice channel!',
 						color:0x2471A3
 					}})
-					play(connection, message);
 					console.log('Joined the voice channel!');
 					joinstatus='joined';
+					play(connection, message);
 				});
 			}
 		}
@@ -151,7 +158,7 @@
 					description:'Skipping the song!',
 					color:0x2471A3
 				}})
-				console.log('Skipped the queue!');
+				console.log('Skipped the song!');
 			}
 			else{
 				message.delete();
@@ -161,6 +168,7 @@
 					color:0x2471A3
 				}})
 				return;
+				console.log('There are no songs! What are you skipping?');
 			}
 		}
 
@@ -174,6 +182,7 @@
 					description:'Ending the queue. Leaving the voice channel!',
 					color:0x2471A3
 				}})
+				console.log('Ending the queue. Leaving the voice channel!');
 			}
 			else{
 				message.delete();
