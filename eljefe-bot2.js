@@ -160,7 +160,6 @@
 					description:'There are no songs! What are you skipping?',
 					color:0x2471A3
 				}})
-				message.channel.send();
 				return;
 			}
 		}
@@ -175,7 +174,6 @@
 					description:'Ending the queue. Leaving the voice channel!',
 					color:0x2471A3
 				}})
-				message.channel.send();
 			}
 			else{
 				message.delete();
