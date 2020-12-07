@@ -71,12 +71,6 @@
 						queue: []
 						};
 				}
-				if(joinstatus==='waiting'){
-					message.member.voice.channel.join().then(function(connection){
-						joinstatus='joined';
-						play(connection, message);
-					});
-				}
 
 				server = servers[message.guild.id];
 				server.queue.push(args[1]);
@@ -94,6 +88,13 @@
 							joinstatus='waiting';
 							servers[message.guild.id] = '';
 						}
+					});
+				}
+
+				if(joinstatus==='waiting'){
+					message.member.voice.channel.join().then(function(connection){
+						joinstatus='joined';
+						play(connection, message);
 					});
 				}
 			}
