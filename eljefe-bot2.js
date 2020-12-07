@@ -101,8 +101,8 @@
 
 		if(input === prefix + 'SKIP'){
 			if(joinstatus==='joined'){
+				server = servers[message.guild.id];
 				if(server.dispatcher){
-					server = servers[message.guild.id];
 					server.dispatcher.end();
 				}
 			}
