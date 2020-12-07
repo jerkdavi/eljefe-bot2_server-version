@@ -72,7 +72,6 @@
 						};
 				}
 				if(!joinstatus==='waiting'){
-				}
 					message.member.voice.channel.join().then(function(connection){
 						joinstatus='joined';
 						play(connection, message);
