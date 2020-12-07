@@ -117,6 +117,9 @@
 		if(input === prefix + 'STOP'){
 			if(joinstatus==='joined'){
 				server = servers[message.guild.id];
+				for(var i = server.queue.length -1; i >= 0; i--){
+					server.queue.splice(i, 1);
+				}
 				server.dispatcher.end();
 				message.channel.send('STOP!');
 			}
