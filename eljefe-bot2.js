@@ -83,12 +83,10 @@
 					server.dispatcher.on('finish', () => {
 						if(server.queue[0]){
 							play(connection, message);
-							message.channel.send('IF!');
 						} else {
 							connection.disconnect();
 							joinstatus='waiting';
 							servers[message.guild.id] = '';
-							message.channel.send('ELSE!');
 						}
 					});
 				}
@@ -97,7 +95,6 @@
 					message.member.voice.channel.join().then(function(connection){
 						joinstatus='joined';
 						play(connection, message);
-						message.channel.send('JOINED!');
 					});
 				}
 			}
@@ -107,7 +104,6 @@
 			if(joinstatus==='joined'){
 				server = servers[message.guild.id];
 				server.dispatcher.end();
-				message.channel.send('SKIP!');
 			}
 			else{
 				return;
@@ -121,7 +117,6 @@
 					server.queue.splice(i, 1);
 				}
 				server.dispatcher.end();
-				message.channel.send('STOP!');
 			}
 			else{
 				return;
