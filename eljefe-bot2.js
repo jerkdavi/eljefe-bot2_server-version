@@ -27,20 +27,20 @@
 			message.channel.send({embed:{
 				description:commandsList,
 				color:0x2471A3
-			}})
+			}});
 		}
 		if(input === prefix + 'COMMANDS'){
 			message.channel.send({embed:{
 				description:commandsList,
 				color:0x2471A3
-			}})
+			}});
 		}
 
 		if(input === prefix + 'PING'){
 			message.channel.send({embed:{
 				description:`Ping successful! The bot ${bot.user.tag}! is online!`,
 				color:0x2471A3
-			}})
+			}});
 		}
 
 		if(input === prefix + 'PLAY'){
@@ -48,14 +48,14 @@
 				message.channel.send({embed:{
 					description:'You need to provide a link!',
 					color:0x2471A3
-				}})
+				}});
 				return;
 			}
 			if(!(ytdl.validateURL(args[1]))){
 				message.channel.send({embed:{
 					description:'You didn\'t provide a valid youtube link!',
 					color:0x2471A3
-				}})
+				}});
 				return;
 			}
 			else{
@@ -63,7 +63,7 @@
 					message.channel.send({embed:{
 						description:'You must be in a voice channel to play the music!',
 						color:0x2471A3
-					}})
+					}});
 					return;
 				}
 				if(!servers[message.guild.id]){
@@ -83,10 +83,12 @@
 					server.dispatcher.on('finish', () => {
 						if(server.queue[0]){
 							play(connection, message);
+							message.channel.send('IF!');
 						} else {
 							connection.disconnect();
 							joinstatus='waiting';
 							servers[message.guild.id] = '';
+							message.channel.send('ELSE!');
 						}
 					});
 				}
@@ -95,6 +97,7 @@
 					message.member.voice.channel.join().then(function(connection){
 						joinstatus='joined';
 						play(connection, message);
+						message.channel.send('JOINED!');
 					});
 				}
 			}
@@ -105,6 +108,7 @@
 				server = servers[message.guild.id];
 				if(server.dispatcher){
 					server.dispatcher.end();
+					message.channel.send('SKIP!');
 				}
 			}
 			else{
@@ -116,6 +120,7 @@
 			if(joinstatus==='joined'){
 				server = servers[message.guild.id];
 				server.dispatcher.end();
+				message.channel.send('STOP!');
 			}
 			else{
 				return;
