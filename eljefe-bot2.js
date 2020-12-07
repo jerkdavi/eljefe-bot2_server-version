@@ -59,14 +59,23 @@
 				}})
 				return;
 			}
-			if(!message.member.voice.channel){
+			if(!(ytdl.validateURL(args[1]))){
 				message.channel.send({embed:{
-					description:'You must be in a voice channel to play the music!',
+					title:'>play '+args[1],
+					description:'You didn\'t provide a valid youtube link!',
 					color:0x2471A3
 				}})
+				console.log('Invalid youtube link!');
 				return;
 			}
-			if(ytdl.validateURL(args[1])){
+			else{
+				if(!message.member.voice.channel){
+					message.channel.send({embed:{
+						description:'You must be in a voice channel to play the music!',
+						color:0x2471A3
+					}})
+					return;
+				}
 				if(!servers[message.guild.id]){
 					servers[message.guild.id] = {
 						queue: []
@@ -101,15 +110,6 @@
 					});
 				}
 			}
-			else{
-				message.channel.send({embed:{
-					title:'>play '+args[1],
-					description:'You didn\'t provide a valid youtube link!',
-					color:0x2471A3
-				}})
-				console.log('Invalid youtube link!');
-				return;
-			}
 
 			if(joinstatus==='joined'){
 				console.log('I\'m already in the voice channel!');
@@ -143,7 +143,7 @@
 			}
 			else{
 				message.channel.send({embed:{
-					title:'>skip',
+					title:'>skip ?',
 					description:'There are no songs! What are you skipping?',
 					color:0x2471A3
 				}})
@@ -165,7 +165,7 @@
 			}
 			else{
 				message.channel.send({embed:{
-					title:'>stop',
+					title:'>stop ?',
 					description:'There are no songs! What are you stoping?',
 					color:0x2471A3
 				}})
