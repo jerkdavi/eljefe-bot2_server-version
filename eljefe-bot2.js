@@ -51,10 +51,10 @@
 		}
 
 		if(input === prefix + 'PLAY'){
-			message.delete();
 			console.log('args[0]: '+args[0]);
 			console.log('args[1]: '+args[1]);
 			if(!args[1]){
+				message.delete();
 				message.channel.send({embed:{
 					title:'>play ?',
 					description:'You need to provide a link!',
@@ -63,6 +63,7 @@
 				return;
 			}
 			if(!(ytdl.validateURL(args[1]))){
+				message.delete();
 				message.channel.send({embed:{
 					title:'>play '+args[1],
 					description:'You didn\'t provide a valid youtube link!',
@@ -73,6 +74,7 @@
 			}
 			else{
 				if(!message.member.voice.channel){
+					message.delete();
 					message.channel.send({embed:{
 						description:'You must be in a voice channel to play the music!',
 						color:0x2471A3
@@ -88,6 +90,7 @@
 				server = servers[message.guild.id];
 				server.queue.push(args[1]);
 				console.log('Queue push passed!');
+				message.delete();
 				message.channel.send({embed:{
 						title:'>play '+args[1],
 						description:'Added to the queue!',
@@ -137,12 +140,12 @@
 		}
 
 		if(input === prefix + 'SKIP'){
-			message.delete();
 			if(joinstatus==='joined'){
 				server = servers[message.guild.id];
 				if(server.dispatcher){
 					server.dispatcher.end();
 				}
+				message.delete();
 				message.channel.send({embed:{
 					title:'>skip',
 					description:'Skipping the song!',
@@ -151,6 +154,7 @@
 				console.log('Skipped the queue!');
 			}
 			else{
+				message.delete();
 				message.channel.send({embed:{
 					title:'>skip ?',
 					description:'There are no songs! What are you skipping?',
@@ -162,10 +166,10 @@
 		}
 
 		if(input === prefix + 'STOP'){
-			message.delete();
 			if(joinstatus==='joined'){
 				server = servers[message.guild.id];
 				server.dispatcher.end();
+				message.delete();
 				message.channel.send({embed:{
 					title:'>stop',
 					description:'Ending the queue. Leaving the voice channel!',
@@ -174,6 +178,7 @@
 				message.channel.send();
 			}
 			else{
+				message.delete();
 				message.channel.send({embed:{
 					title:'>stop ?',
 					description:'There are no songs! What are you stoping?',
