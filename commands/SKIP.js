@@ -18,5 +18,5 @@
 		}
 	}
 	module.exports.config = {
-		command:'USERINFO'
+		command:'SKIP'
 	}
