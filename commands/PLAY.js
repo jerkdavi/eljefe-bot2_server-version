@@ -69,7 +69,6 @@
 				});
 			}
 		}
-	}
 	module.exports.config = {
 		command:'CLR'
 	}
