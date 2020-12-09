@@ -2,6 +2,10 @@
 
 	var ytdl = require('ytdl-core');
 
+	var servers = {};
+	var server;
+	var joinstatus='waiting';
+
 	module.exports.run = async (bot, message, args) => {
 		var sender = message.author;
 		var args = message.content.toString().split(' ');
