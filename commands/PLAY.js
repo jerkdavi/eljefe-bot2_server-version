@@ -75,5 +75,5 @@
 		}
 	}
 	module.exports.config = {
-		command:'CLR'
+		command:'PLAY'
 	}
