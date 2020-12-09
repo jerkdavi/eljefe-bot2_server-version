@@ -46,7 +46,7 @@
 			var cmd = bot.commands.get(cont[0]);
 
 			if(cmd) {
-				cmd.run(bot, message, args);
+				cmd.run(bot, message, args, servers, joinstatus);
 			}
 			else{
 				//console.log('Error! Else passed!');
