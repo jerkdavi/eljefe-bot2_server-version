@@ -78,8 +78,8 @@
 						color:0x2471A3
 					}});
 				});
-				console.log('Play3; returning joinstatus');
-				console.log('Play2; joinstatus='+joinstatus);
+				console.log('Play3; joinstatus='+joinstatus);
+				console.log('Play; returning joinstatus');
 				return joinstatus;
 			}
 		}
