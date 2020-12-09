@@ -7,8 +7,11 @@
 	bot.commands = new Discord.Collection();
 
 	var servers = {};
+	console.log('Main; servers = {};');
 	var server;
+	console.log('Main; servers;');
 	var joinstatus='waiting';
+	console.log('Main; joinstatus=waiting');
 	
 	fs.readdir('./commands/', (err, files) => {
 		if(err){
