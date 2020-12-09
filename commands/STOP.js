@@ -1,5 +1,6 @@
 	/*jshint esversion: 6 */
 
+	var servers
 	var server;
 	var joinstatus;
 
