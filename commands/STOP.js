@@ -21,5 +21,5 @@
 		}
 	}
 	module.exports.config = {
-		command:'USERINFO'
+		command:'STOP'
 	}
