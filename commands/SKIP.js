@@ -1,10 +1,8 @@
 	/*jshint esversion: 6 */
 
-	var servers;
 	var server;
-	var joinstatus;
 
-	module.exports.run = async (bot, message, args) => {
+	module.exports.run = async (bot, message, args, servers, joinstatus) => {
 		if(joinstatus==='joined'){
 			server = servers[message.guild.id];
 			server.dispatcher.end();
