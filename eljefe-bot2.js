@@ -5,7 +5,24 @@
 	var fs = require('fs');
 	var ytdl = require('ytdl-core');
 
-	var commandsList = fs.readFileSync('Storage/commands.txt', 'utf8');
+	bot.commands = new Discord.Collection();
+
+	fs.readdir('./commands/', (err, files) => {
+		if(err){
+			console.error(err);
+		}
+			
+		var jsfiles = files.filter(f => f.split('.').pop() === 'js');
+		if(jsfiles.length <= 0) { return console.log('No commands found!'); }
+		else { console.log(jsfiles.length + ' commands found!'); }
+		
+		jsfiles.forEach((f, i) => {
+			var cmds = require(`./commands/${f}`);
+			console.log(`Command ${f} loading...`);
+			bot.commands.set(cmds.config.command, cmds);
+		});
+		
+	});
 
 	var prefix = process.env.prefix;
 	var owner = process.env.ownerID;
@@ -23,107 +40,25 @@
 			return;
 		}
 
-		if(input === prefix + 'HELP'){
-			message.channel.send({embed:{
-				description:commandsList,
-				color:0x2471A3
-			}});
-		}
-		if(input === prefix + 'COMMANDS'){
-			message.channel.send({embed:{
-				description:commandsList,
-				color:0x2471A3
-			}});
-		}
+		if(input.startsWith(prefix)){
 
-		if(input === prefix + 'PING'){
-			message.channel.send({embed:{
-				description:`Ping successful! The bot ${bot.user.tag}! is online!`,
-				color:0x2471A3
-			}});
-		}
+			var cont = input.slice(prefix.length).split(' ');
+			var args = cont.slice(1);
+			var cmd = bot.commands.get(cont[0]);
 
-		if(input === prefix + 'PLAY'){
-			if(!args[1]){
-				message.channel.send({embed:{
-					description:'You need to provide a link!',
-					color:0x2471A3
-				}});
-				return;
-			}
-			if(!(ytdl.validateURL(args[1]))){
-				message.channel.send({embed:{
-					description:'You didn\'t provide a valid youtube link!',
-					color:0x2471A3
-				}});
-				return;
+			if(cmd) {
+				cmd.run(bot, message, args);
 			}
 			else{
-				if(!message.member.voice.channel){
-					message.channel.send({embed:{
-						description:'You must be in a voice channel to play the music!',
-						color:0x2471A3
-					}});
-					return;
-				}
-				if(!servers[message.guild.id]){
-					servers[message.guild.id] = {
-						queue: []
-					};
-				}
-
-				server = servers[message.guild.id];
-				server.queue.push(args[1]);
-
-				function play(connection, message){
-					server = servers[message.guild.id];
-					server.dispatcher = connection.play(ytdl(server.queue[0], {filter: 'audioonly'}));
-					server.queue.shift();
-
-					server.dispatcher.on('finish', () => {
-						if(server.queue[0]){
-							play(connection, message);
-						} else {
-							connection.disconnect();
-							joinstatus='waiting';
-							servers[message.guild.id] = '';
-						}
-					});
-				}
-
-				if(joinstatus==='waiting'){
-					message.member.voice.channel.join().then(function(connection){
-						joinstatus='joined';
-						play(connection, message);
-					});
-				}
-			}
-		}
-
-		if(input === prefix + 'SKIP'){
-			if(joinstatus==='joined'){
-				server = servers[message.guild.id];
-				server.dispatcher.end();
-			}
-			else{
+				//console.log('Error! Else passed!');
 				return;
 			}
 		}
-
-		if(input === prefix + 'STOP'){
-			if(joinstatus==='joined'){
-				server = servers[message.guild.id];
-				for(var i = server.queue.length -1; i >= 0; i--){
-					server.queue.splice(i, 1);
-				}
-				server.dispatcher.end();
-			}
-			else{
-				return;
-			}
+		else{
+			return;
 		}
 	});
-	
+
 	bot.on('ready', function(ready){
 
 		console.log(`Logged in as ${bot.user.tag}!`);
