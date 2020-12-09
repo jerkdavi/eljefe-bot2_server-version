@@ -63,6 +63,7 @@
 						servers[message.guild.id] = '';
 					}
 				});
+				console.log('Play1; joinstatus='+joinstatus);
 				console.log('Play; returning servers, server and joinstatus');
 				return servers, server, joinstatus;
 			}
@@ -70,7 +71,7 @@
 			if(joinstatus==='waiting'){
 				message.member.voice.channel.join().then(function(connection){
 					joinstatus='joined';
-					console.log('Play; joinstatus='+joinstatus);
+					console.log('Play2; joinstatus='+joinstatus);
 					play(connection, message);
 					message.channel.send({embed:{
 						description:'Joined the voice channel!',
