@@ -2,11 +2,9 @@
 
 	var ytdl = require('ytdl-core');
 
-	var servers;
 	var server;
-	var joinstatus;
 
-	module.exports.run = async (bot, message, args) => {
+	module.exports.run = async (bot, message, args, servers, joinstatus) => {
 		var sender = message.author;
 		var args = message.content.toString().split(' ');
 		var input = args[0].toUpperCase();
