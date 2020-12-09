@@ -2,8 +2,6 @@
 
 	var ytdl = require('ytdl-core');
 
-	var server;
-
 	module.exports.run = async (bot, message, args, servers, server, joinstatus) => {
 		var sender = message.author;
 		var args = message.content.toString().split(' ');
@@ -61,6 +59,7 @@
 					} else {
 						connection.disconnect();
 						joinstatus='waiting';
+						console.log('Play-Else; joinstatus=waiting');
 						servers[message.guild.id] = '';
 					}
 				});
@@ -71,6 +70,7 @@
 			if(joinstatus==='waiting'){
 				message.member.voice.channel.join().then(function(connection){
 					joinstatus='joined';
+					console.log('Play; joinstatus=joined');
 					play(connection, message);
 					message.channel.send({embed:{
 						description:'Joined the voice channel!',
