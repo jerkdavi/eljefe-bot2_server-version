@@ -1,6 +1,6 @@
 List of Commands:
 
->help or >commands - Returns this List of Commands
+>help - Returns this List of Commands
 >ping - Pings the bot
 >play [youtube link] - Plays the song by youtube link
 >play [song name] - Plays the song by song name --> Still working on this!
