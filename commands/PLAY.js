@@ -59,7 +59,7 @@
 					} else {
 						connection.disconnect();
 						joinstatus='waiting';
-						console.log('Play-Else; joinstatus=waiting');
+						console.log('Play-Else; joinstatus='+joinstatus);
 						servers[message.guild.id] = '';
 					}
 				});
@@ -70,7 +70,7 @@
 			if(joinstatus==='waiting'){
 				message.member.voice.channel.join().then(function(connection){
 					joinstatus='joined';
-					console.log('Play; joinstatus=joined');
+					console.log('Play; joinstatus='+joinstatus);
 					play(connection, message);
 					message.channel.send({embed:{
 						description:'Joined the voice channel!',
