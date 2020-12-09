@@ -1,5 +1,7 @@
 	/*jshint esversion: 6 */
 
+	var ytdl = require('ytdl-core');
+
 	module.exports.run = async (bot, message, args) => {
 		var sender = message.author;
 		var args = message.content.toString().split(' ');
