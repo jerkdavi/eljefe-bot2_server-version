@@ -31,17 +31,17 @@
 
 			server = servers[message.guild.id];
 			server.queue.push(args[1]);
-			for(var i = server.queue.length -1; i >= 0; i--){
 				message.channel.send({embed:{
 				description:'Song added to the queue!',
 				color:0x2471A3
 			}});
 
 			function play(connection, message){
+
 				server = servers[message.guild.id];
 				server.dispatcher = connection.play(ytdl(server.queue[0], {filter: 'audioonly'}));
 				server.queue.shift();
-				for(var i = server.queue.length -1; i >= 0; i--){
+
 				message.channel.send({embed:{
 					description:'Playing the song!',
 					color:0x2471A3
@@ -69,6 +69,7 @@
 				});
 			}
 		}
+	}
 	module.exports.config = {
 		command:'CLR'
 	}
