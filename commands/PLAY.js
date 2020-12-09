@@ -2,6 +2,7 @@
 
 	var ytdl = require('ytdl-core');
 
+	var servers;
 	var server;
 	var joinstatus;
 
