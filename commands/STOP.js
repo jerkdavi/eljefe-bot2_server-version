@@ -4,6 +4,7 @@
 
 	module.exports.run = async (bot, message, args, servers, server, joinstatus) => {
 		if(joinstatus==='joined'){
+			console.log('Stop; joinstatus===joined');
 			server = servers[message.guild.id];
 			for(var i = server.queue.length -1; i >= 0; i--){
 				server.queue.splice(i, 1);
@@ -17,6 +18,7 @@
 			return server;
 		}
 		else{
+			console.log('Stop; joinstatus===waiting');
 			message.channel.send({embed:{
 				description:'There is nothing to stop!',
 				color:0x2471A3
