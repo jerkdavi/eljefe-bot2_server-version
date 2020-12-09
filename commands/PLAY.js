@@ -4,7 +4,7 @@
 
 	var server;
 
-	module.exports.run = async (bot, message, args, servers, joinstatus) => {
+	module.exports.run = async (bot, message, args, servers, server, joinstatus) => {
 		var sender = message.author;
 		var args = message.content.toString().split(' ');
 		var input = args[0].toUpperCase();
@@ -64,7 +64,8 @@
 						servers[message.guild.id] = '';
 					}
 				});
-				return console.log('Play!!!');
+				console.log('Play; returning servers, server and joinstatus');
+				return servers, server, joinstatus;
 			}
 
 			if(joinstatus==='waiting'){
@@ -76,6 +77,8 @@
 						color:0x2471A3
 					}});
 				});
+				console.log('Play; returning joinstatus');
+				return joinstatus;
 			}
 		}
 	}
