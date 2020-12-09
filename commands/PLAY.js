@@ -2,9 +2,8 @@
 
 	var ytdl = require('ytdl-core');
 
-	var servers = {};
 	var server;
-	var joinstatus='waiting';
+	var joinstatus;
 
 	module.exports.run = async (bot, message, args) => {
 		var sender = message.author;
@@ -66,6 +65,7 @@
 						servers[message.guild.id] = '';
 					}
 				});
+				return console.log('Play!!!');
 			}
 
 			if(joinstatus==='waiting'){
