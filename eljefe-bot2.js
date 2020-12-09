@@ -6,6 +6,10 @@
 
 	bot.commands = new Discord.Collection();
 
+	var servers = {};
+	var server;
+	var joinstatus='waiting';
+	
 	fs.readdir('./commands/', (err, files) => {
 		if(err){
 			console.error(err);
