@@ -3,7 +3,6 @@
 	var Discord = require('discord.js');
 	var bot = new Discord.Client();
 	var fs = require('fs');
-	var ytdl = require('ytdl-core');
 
 	bot.commands = new Discord.Collection();
 
@@ -26,10 +25,6 @@
 
 	var prefix = process.env.prefix;
 	var owner = process.env.ownerID;
-
-	var servers = {};
-	var server;
-	var joinstatus='waiting';
 
 	bot.on('message', function(message){
 		var sender = message.author;
