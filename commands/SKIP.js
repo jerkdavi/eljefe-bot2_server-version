@@ -2,7 +2,7 @@
 
 	var server;
 
-	module.exports.run = async (bot, message, args, servers, joinstatus) => {
+	module.exports.run = async (bot, message, args, servers, server, joinstatus) => {
 		if(joinstatus==='joined'){
 			server = servers[message.guild.id];
 			server.dispatcher.end();
@@ -10,6 +10,8 @@
 				description:'Skipping the song!',
 				color:0x2471A3
 			}});
+			console.log('Skip; returning server');
+			return server;
 		}
 		else{
 			message.channel.send({embed:{
