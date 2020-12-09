@@ -1,6 +1,10 @@
 	/*jshint esversion: 6 */
 
 	module.exports.run = async (bot, message, args) => {
+		var sender = message.author;
+		var args = message.content.toString().split(' ');
+		var input = args[0].toUpperCase();
+		
 		if(!args[1]){
 			message.channel.send({embed:{
 				description:'You need to provide a link!',
