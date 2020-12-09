@@ -4,6 +4,7 @@
 
 	module.exports.run = async (bot, message, args, servers, server, joinstatus) => {
 		if(joinstatus==='joined'){
+			console.log('Skip; joinstatus===joined');
 			server = servers[message.guild.id];
 			server.dispatcher.end();
 			message.channel.send({embed:{
@@ -14,6 +15,7 @@
 			return server;
 		}
 		else{
+			console.log('Skip; joinstatus===waiting');
 			message.channel.send({embed:{
 				description:'There is nothing to skip!',
 				color:0x2471A3
