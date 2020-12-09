@@ -34,6 +34,7 @@
 	var owner = process.env.ownerID;
 
 	bot.on('message', function(message){
+		console.log('Main-message; joinstatus='+joinstatus);
 		var sender = message.author;
 		var args = message.content.toString().split(' ');
 		var input = args[0].toUpperCase();
