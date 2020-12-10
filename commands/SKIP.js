@@ -1,12 +1,12 @@
 	/*jshint esversion: 6 */
-
-	module.exports.run = async (bot, message, args, servers, server, botStatus) => {
+	//console.log('Step 400');
+	module.exports.run = async (bot, message, args, Servers, botStatus) => {
 		//console.log('Step 401');
-		if(botStatus.botstatus===1){
+		if(botStatus[781277535232458763].botstatus===1){
 			//console.log('Step 402');
-			server = servers[message.guild.id];
+			//let server = Servers[message.guild.id];
 			//console.log('Step 403');
-			server.dispatcher.end();
+			Servers[message.guild.id].dispatcher.end();
 			//console.log('Step 404');
 			message.channel.send({embed:{
 				description:'Skipping the song!',
@@ -14,6 +14,7 @@
 			}});
 			//console.log('Step 405');
 		}
+		//console.log('Step 406');
 		else{
 			//console.log('Step 407');
 			message.channel.send({embed:{
