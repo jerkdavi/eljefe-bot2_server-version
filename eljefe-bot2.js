@@ -6,93 +6,94 @@
 	//console.log('Step 002');
 	let fs = require('fs');
 	//console.log('Step 003');
-
 	let botStatus = JSON.parse(fs.readFileSync('Storage/botStatus.json', 'utf8'));
 	//console.log('Step 004');
-	
-	bot.commands = new Discord.Collection();
+	let Servers = JSON.parse(fs.readFileSync('Storage/botStatus.json', 'utf8'));
 	//console.log('Step 005');
-	let servers = {};
+	bot.commands = new Discord.Collection();
 	//console.log('Step 006');
-	let server;
-	//console.log('Step 007');
-	
 	fs.readdir('./commands/', (err, files) => {
-		//console.log('Step 008');
+		//console.log('Step 007');
 		if(err){
+			//console.log('Step 008');
 			console.error(err);
-			//console.log('Step 009');
 		}
-			
+		//console.log('Step 009');
 		let jsfiles = files.filter(f => f.split('.').pop() === 'js');
 		//console.log('Step 010');
 		if(jsfiles.length <= 0) { return /*console.log('Step 011'); */console.log('No commands found!'); }
 		else { /*console.log('Step 012'); */console.log(jsfiles.length + ' commands found!'); }
-		
+		//console.log('Step 013');
 		jsfiles.forEach((f, i) => {
-			//console.log('Step 013');
-			let cmds = require(`./commands/${f}`);
 			//console.log('Step 014');
-			console.log(`Command ${f} loading...`);
+			let cmds = require(`./commands/${f}`);
 			//console.log('Step 015');
-			bot.commands.set(cmds.config.command, cmds);
+			console.log(`Command ${f} loading...`);
 			//console.log('Step 016');
+			bot.commands.set(cmds.config.command, cmds);
+			//console.log('Step 017');
 		});
-		//console.log('Step 017');
+		//console.log('Step 018');
 	});
-	
-	let prefix = process.env.prefix;
-	//console.log('Step 018');
-	let owner = process.env.ownerID;
 	//console.log('Step 019');
-
+	let prefix = process.env.prefix;
+	//console.log('Step 020');
+	let owner = process.env.ownerID;
+	//console.log('Step 021');
 	bot.on('message', function(message){
-		//console.log('Step 020');
+		//console.log('Step 022');
 		let sender = message.author;
-		//console.log('Step 021');
-
+		//console.log('Step 023');
 		if((sender.id === '781250071215472640') || (sender.id === '781277535232458763')){
-			//console.log('Step 022');
+			//console.log('Step 024');
 			return;
 		}
-
-		if(message.content.startsWith(prefix)){
-			//console.log('Step 023');
-			let args = message.content.toString().split(' ');
-			//console.log('Step 024');
-			let input = args[0].toUpperCase();
-			//console.log('Step 025');
-
-			let cont = input.slice(prefix.length).split(' ');
+		//console.log('Step 025');
+		if(!botStatus[781277535232458763]){
 			//console.log('Step 026');
+			botStatus[781277535232458763] = {
+			botstatus: 0 };
+			//console.log('Step 027');
+		}
+		//console.log('Step 028');
+		if(message.content.startsWith(prefix)){
+			//console.log('Step 029');
+			let args = message.content.toString().split(' ');
+			//console.log('Step 030');
+			let input = args[0].toUpperCase();
+			//console.log('Step 031');
+			let cont = input.slice(prefix.length).split(' ');
+			//console.log('Step 032');
 			//let args = cont.slice(1);
 			let cmd = bot.commands.get(cont[0]);
-			//console.log('Step 027');
-
+			//console.log('Step 033');
 			if(cmd) {
-				//console.log('Step 028');
-				cmd.run(bot, message, args, servers, server, botStatus);
-				//console.log('Step 029');
+				//console.log('Step 034');
+				cmd.run(bot, message, args, Servers, botStatus);
+				//console.log('Step 035');
 			}
+			//console.log('Step 036');
 			else{
-				//console.log('Step 030');
+				//console.log('Step 037');
 				return;
 			}
-			//console.log('Step 031');
+			//console.log('Step 038');
 		}
+		//console.log('Step 039');
 		else{
-			//console.log('Step 032');
+			//console.log('Step 040');
 			return;
 		}
+		//console.log('Step 041');
 	});
-
+	//console.log('Step 042');
 	bot.on('ready', function(ready){
-		//console.log('Step 033');
+		//console.log('Step 043');
 		console.log(`Logged in as ${bot.user.tag}!`);
-		//console.log('Step 034');
+		//console.log('Step 044');
 		bot.user.setStatus('Online');
-		//console.log('Step 035');
+		//console.log('Step 045');
 	});
-
+	//console.log('Step 046');
 	bot.login(process.env.DISCORD_TOKEN);
-	//console.log('Step 036');
+	//console.log('Step 047');
