@@ -1,6 +1,6 @@
 	/*jshint esversion: 6 */
-
-	module.exports.run = async (bot, message, args, servers, server, botStatus) => {
+	//console.log('Step 200');
+	module.exports.run = async (bot, message, args, Servers, botStatus) => {
 		//console.log('Step 201');
 		message.channel.send({embed:{
 			description:`Ping successful! The bot ${bot.user.tag}! is online!`,
