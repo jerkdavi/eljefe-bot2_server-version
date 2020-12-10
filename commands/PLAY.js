@@ -45,10 +45,10 @@
 			//console.log('Step 309');
 			server.queue.push(args[1]);
 			//console.log('Step 310');
-			/*message.channel.send({embed:{
+			message.channel.send({embed:{
 				description:'Song added to the queue!',
 				color:0x2471A3
-			}});*/
+			}});
 
 			function play(connection, message){
 				//console.log('Step 311');
@@ -59,10 +59,10 @@
 				server.queue.shift();
 				//console.log('Step 314');
 
-				/*message.channel.send({embed:{
+				message.channel.send({embed:{
 					description:'Playing the song!',
 					color:0x2471A3
-				}});*/
+				}});
 
 				server.dispatcher.on('finish', () => {
 					//console.log('Step 315');
@@ -93,10 +93,10 @@
 					//console.log('Step 327');
 					play(connection, message);
 					//console.log('Step 328');
-					/*message.channel.send({embed:{
+					message.channel.send({embed:{
 						description:'Joined the voice channel!',
 						color:0x2471A3
-					}});*/
+					}});
 				}).catch(error => {
 					//console.log('Step 329');
 					console.error(error);
