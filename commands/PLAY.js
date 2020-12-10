@@ -72,42 +72,47 @@
 						//console.log('Step 317');
 					} else {
 						//console.log('Step 318');
-						connection.disconnect();
+						message.channel.send({embed:{
+							description:'Leaving voice channel!',
+							color:0x2471A3
+						}});
 						//console.log('Step 319');
-						botStatus.botstatus--;
+						connection.disconnect();
 						//console.log('Step 320');
-						servers[message.guild.id] = '';
+						botStatus.botstatus--;
 						//console.log('Step 321');
+						servers[message.guild.id] = '';
+						//console.log('Step 322');
 					}
-					//console.log('Step 322');
+					//console.log('Step 323');
 				});
-				//console.log('Step 323');
+				//console.log('Step 324');
 			}
-			//console.log('Step 324');
+			//console.log('Step 325');
 
 			if(botStatus.botstatus===0){
-				//console.log('Step 325');
+				//console.log('Step 326');
 				message.member.voice.channel.join().then(function(connection){
-					//console.log('Step 326');
-					botStatus.botstatus++;
 					//console.log('Step 327');
-					play(connection, message);
+					botStatus.botstatus++;
 					//console.log('Step 328');
+					play(connection, message);
+					//console.log('Step 329');
 					message.channel.send({embed:{
 						description:'Joined the voice channel!',
 						color:0x2471A3
 					}});
 				}).catch(error => {
-					//console.log('Step 329');
+					//console.log('Step 330');
 					console.error(error);
 				});
-				//console.log('Step 330');
+				//console.log('Step 331');
 			}
-			//console.log('Step 331');
+			//console.log('Step 332');
 		}
-		//console.log('Step 332');
+		//console.log('Step 333');
 	}
-	//console.log('Step 333');
+	//console.log('Step 334');
 	module.exports.config = {
 		command:'PLAY'
 	}
