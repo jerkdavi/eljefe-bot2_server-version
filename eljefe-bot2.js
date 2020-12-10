@@ -26,7 +26,7 @@
 			
 		let jsfiles = files.filter(f => f.split('.').pop() === 'js');
 		//console.log('Step 010');
-		if(jsfiles.length <= 0) { return //console.log('Step 011'); console.log('No commands found!'); }
+		if(jsfiles.length <= 0) { return /*console.log('Step 011'); */console.log('No commands found!'); }
 		else { //console.log('Step 012'); console.log(jsfiles.length + ' commands found!'); }
 		
 		jsfiles.forEach((f, i) => {
