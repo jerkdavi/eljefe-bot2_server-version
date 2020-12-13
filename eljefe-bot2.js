@@ -8,7 +8,7 @@
 	//console.log('Step 003');
 	let botStatus = JSON.parse(fs.readFileSync('Storage/botStatus.json', 'utf8'));
 	//console.log('Step 004');
-	let Servers = JSON.parse(fs.readFileSync('Storage/botStatus.json', 'utf8'));
+	let Servers = JSON.parse(fs.readFileSync('Storage/Servers.json', 'utf8'));
 	//console.log('Step 005');
 	bot.commands = new Discord.Collection();
 	//console.log('Step 006');
