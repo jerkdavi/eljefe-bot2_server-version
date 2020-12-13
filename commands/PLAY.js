@@ -53,6 +53,10 @@
 			//let server = Servers[message.guild.id];
 			//console.log('Step 319');
 			Servers[message.guild.id].queue.push(args[1]);
+			//Servers[message.guild.id].queue += args[1];
+			/*Servers[message.guild.id] = {
+				queue: args[1]
+			};*/
 			//console.log('Step 320');
 			//Servers[message.guild.id].queue = server.queue;
 			//console.log('Step 321');
