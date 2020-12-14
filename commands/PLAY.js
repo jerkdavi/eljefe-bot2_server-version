@@ -6,10 +6,6 @@
 		//console.log('Step 302');
 		let ytdl = require('ytdl-core');
 		//console.log('Step 303');
-		let sender = message.author;
-		//console.log('Step 304');
-		let input = args[0].toUpperCase();
-		//console.log('Step 305');
 		if(!args[1]){
 			//console.log('Step 306');
 			message.channel.send({embed:{
