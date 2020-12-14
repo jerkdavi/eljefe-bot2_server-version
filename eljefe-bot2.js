@@ -36,8 +36,7 @@
 		//console.log('Step 018');
 	});
 	//console.log('Step 019');
-	let prefix = '>';
-	//let prefix = process.env.prefix;
+	let prefix = process.env.prefix;
 	//console.log('Step 020');
 	let owner = process.env.ownerID;
 	//console.log('Step 021');
@@ -88,6 +87,5 @@
 		//console.log('Step 041');
 	});
 	//console.log('Step 042');
-	bot.login('NzgxMjc3NTM1MjMyNDU4NzYz.X77TZw.Bj6AkRIKW_Etti3lhVnAvduWgtU');
-	//bot.login(process.env.DISCORD_TOKEN);
+	bot.login(process.env.DISCORD_TOKEN);
 	//console.log('Step 043');
