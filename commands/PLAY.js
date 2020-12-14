@@ -30,141 +30,135 @@
 			return;
 		}
 		//console.log('Step 311');
-		else{
+		if(!message.member.voice.channel){
 			//console.log('Step 312');
-			if(!message.member.voice.channel){
-				//console.log('Step 313');
-				message.channel.send({embed:{
-					description:'You must be in a voice channel to play the music!',
-					color:0x2471A3
-				}});
-				//console.log('Step 314');
-				return;
-			}
-			//console.log('Step 315');
-			if(!Servers[message.guild.id]){
-				//console.log('Step 316');
-				Servers[message.guild.id] = {
-					queue: []
-				};
-				//console.log('Step 317');
-			}
-			//console.log('Step 318');
-			//let server = Servers[message.guild.id];
-			//console.log('Step 319');
-			Servers[message.guild.id].queue.push(args[1]);
-			//Servers[message.guild.id].queue += args[1];
-			/*Servers[message.guild.id] = {
-				queue: args[1]
-			};*/
-			//console.log('Step 320');
-			//Servers[message.guild.id].queue = server.queue;
-			//console.log('Step 321');
-			fs.writeFile('Storage/Servers.json', JSON.stringify(Servers), (err) => {
-				//console.log('Step 322');
-				if(err){
-					//console.log('Step 323');
-					console.error(err);
-				}
-				//console.log('Step 324');
-			});
-			//console.log('Step 325');
 			message.channel.send({embed:{
-				description:'Song added to the queue!',
+				description:'You must be in a voice channel to play the music!',
 				color:0x2471A3
 			}});
-			//console.log('Step 326');
-			function play(connection, message){
-				//console.log('Step 327');
-				//let server = Servers[message.guild.id];
-				//console.log('Step 328');
-				Servers[message.guild.id].dispatcher = connection.play(ytdl(Servers[message.guild.id].queue[0], {filter: 'audioonly'}));
-				//console.log('Step 329');
-				Servers[message.guild.id].queue.shift();
-				//console.log('Step 330');
-				message.channel.send({embed:{
-					description:'Playing the song!',
-					color:0x2471A3
-				}});
-				//console.log('Step 331');
-				Servers[message.guild.id].dispatcher.on('finish', () => {
-					//console.log('Step 332');
-					if(Servers[message.guild.id].queue[0]){
-						//console.log('Step 333');
-						play(connection, message);
-						//console.log('Step 334');
-					}
-					//console.log('Step 335');
-					else {
-						//console.log('Step 336');
-						message.channel.send({embed:{
-							description:'Leaving voice channel!',
-							color:0x2471A3
-						}});
-						//console.log('Step 337');
-						connection.disconnect();
-						//console.log('Step 338');
-						botStatus[781277535232458763].botstatus--;
-						//console.log('Step 339');
-						fs.writeFile('Storage/botStatus.json', JSON.stringify(botStatus), (err) => {
-							//console.log('Step 340');
-							if(err){
-								//console.log('Step 341');
-								console.error(err);
-							}
-							//console.log('Step 342');
-						});
-						//console.log('Step 343');
-						Servers[message.guild.id] = { queue: [] };
-						//console.log('Step 344');
-						fs.writeFile('Storage/Servers.json', JSON.stringify(Servers), (err) => {
-							//console.log('Step 345');
-							if(err){
-								//console.log('Step 346');
-								console.error(err);
-							}
-							//console.log('Step 347');
-						});
-						//console.log('Step 348');
-					}
-					//console.log('Step 349');
-				});
-				//console.log('Step 350');
+			//console.log('Step 313');
+			return;
+		}
+		//console.log('Step 314');
+		if(!Servers[message.guild.id]){
+			//console.log('Step 315');
+			Servers[message.guild.id] = {
+				queue: []
+			};
+			//console.log('Step 316');
+		}
+		//console.log('Step 317');
+		//let server = Servers[message.guild.id];
+		//console.log('Step 318');
+		Servers[message.guild.id].queue.push(args[1]);
+		//console.log('Step 319');
+		//Servers[message.guild.id].queue += args[1];
+		//console.log('Step 320');
+		/*Servers[message.guild.id] = {
+			queue: args[1]
+		};*/
+		//console.log('Step 321');
+		//Servers[message.guild.id].queue = server.queue;
+		//console.log('Step 322');
+		fs.writeFile('Storage/Servers.json', JSON.stringify(Servers), (err) => {
+			//console.log('Step 323');
+			if(err){
+				//console.log('Step 324');
+				console.error(err);
 			}
-			//console.log('Step 351');
-			if(botStatus[781277535232458763].botstatus===0){
-				//console.log('Step 352');
-				message.member.voice.channel.join().then(function(connection){
-					//console.log('Step 353');
-					botStatus[781277535232458763].botstatus++;
-					//console.log('Step 354');
-					fs.writeFile('Storage/botStatus.json', JSON.stringify(botStatus), (err) => {
-						//console.log('Step 355');
-						if(err){
-							//console.log('Step 356');
-							console.error(err);
-						}
-						//console.log('Step 357');
-					});
-					//console.log('Step 358');
-					play(connection, message);
-					//console.log('Step 359');
+			//console.log('Step 325');
+		});
+		//console.log('Step 326');
+		message.channel.send({embed:{
+			description:'Song added to the queue!',
+			color:0x2471A3
+		}});
+		//console.log('Step 327');
+		function play(connection, message){
+			//console.log('Step 328');
+			//let server = Servers[message.guild.id];
+			//console.log('Step 329');
+			Servers[message.guild.id].dispatcher = connection.play(ytdl(Servers[message.guild.id].queue[0], {filter: 'audioonly'}));
+			//console.log('Step 330');
+			Servers[message.guild.id].queue.shift();
+			//console.log('Step 331');
+			message.channel.send({embed:{
+				description:'Playing the song!',
+				color:0x2471A3
+			}});
+			//console.log('Step 332');
+			Servers[message.guild.id].dispatcher.on('finish', () => {
+				//console.log('Step 333');
+				if(!Servers[message.guild.id].queue[0]){
+					//console.log('Step 334');
 					message.channel.send({embed:{
-						description:'Joined the voice channel!',
+						description:'Leaving voice channel!',
 						color:0x2471A3
 					}});
-					//console.log('Step 360');
-				}).catch(error => {
-					//console.log('Step 361');
-					console.error(error);
-				});
-				//console.log('Step 362');
-			}
-			//console.log('Step 363');
+					//console.log('Step 335');
+					connection.disconnect();
+					//console.log('Step 336');
+					botStatus[781277535232458763].botstatus--;
+					//console.log('Step 337');
+					fs.writeFile('Storage/botStatus.json', JSON.stringify(botStatus), (err) => {
+						//console.log('Step 338');
+						if(err){
+							//console.log('Step 339');
+							console.error(err);
+						}
+						//console.log('Step 340');
+					});
+					//console.log('Step 341');
+					Servers[message.guild.id] = { queue: [] };
+					//console.log('Step 342');
+					fs.writeFile('Storage/Servers.json', JSON.stringify(Servers), (err) => {
+						//console.log('Step 343');
+						if(err){
+							//console.log('Step 344');
+							console.error(err);
+						}
+						//console.log('Step 345');
+					});
+					//console.log('Step 346');
+					return;
+				}
+				//console.log('Step 347');
+				play(connection, message);
+			});
+			//console.log('Step 348');
 		}
-		//console.log('Step 364');
+		//console.log('Step 349');
+		if(botStatus[781277535232458763].botstatus === 0){
+			//console.log('Step 350');
+			message.member.voice.channel.join().then(function(connection){
+				//console.log('Step 351');
+				botStatus[781277535232458763].botstatus++;
+				//console.log('Step 352');
+				fs.writeFile('Storage/botStatus.json', JSON.stringify(botStatus), (err) => {
+					//console.log('Step 353');
+					if(err){
+						//console.log('Step 354');
+						console.error(err);
+					}
+					//console.log('Step 355');
+				});
+				//console.log('Step 356');
+				play(connection, message);
+				//console.log('Step 357');
+				message.channel.send({embed:{
+					description:'Joined the voice channel!',
+					color:0x2471A3
+				}});
+				//console.log('Step 358');
+			}).catch(error => {
+				//console.log('Step 359');
+				console.error(error);
+			});
+			//console.log('Step 360');
+		}
+		//console.log('Step 361');
 	}
-	//console.log('Step 365');
+	//console.log('Step 362');
 	module.exports.config = {
 		command:'PLAY'
 	}
